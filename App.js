@@ -1,21 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import About from './components/About'
+import Search from './components/Search'
+import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-export default function App() {
+function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Meteo</Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>A Propos de moi. mon application meteo.</Text>
+    </View>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Meteo" component={Search} />
+      <Tab.Screen name="A propos de moi" component={SettingsScreen} />
+    </Tab.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
+  );
+}
